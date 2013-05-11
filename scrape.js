@@ -7,7 +7,6 @@ if (phantom.args.length === 0) {
 } else {
     t = Date.now();
     address = phantom.args[0];
-    console.log("Loading " + address);
     //address = 'http://www.homedepot.com/Building-Materials-Drywall/FibaTape/h_d1/N-5yc1vZar3dZ38m/h_d2/Navigation?catalogId=10053&Nu=P_PARENT_ID&langId=-1&storeId=10051';
     output = phantom.args[1]; 
     page.viewportSize = { width: 600, height: 600 };
@@ -33,23 +32,10 @@ if (phantom.args.length === 0) {
 		    return res;
     		};
 
-               console.log(document.title);
-		//var ads = document.querySelectorAll('#googleAdSenseLeft ul li a');
-		var sel = "chitikaAdBlock-0";
-		var ads = document.getElementsByClassName(sel);
- 	        console.log(document.body.innerHTML);	
-                console.log("Found " + ads.length + " ad units.");
-                for (var i=0; i<ads.length; i++){
-		     var adQuery = ads[i].href;
-		     var adContents = parse(adQuery);
-		     adContents.url = adQuery;
-		     adContents.text = ads[i].innerText;
-		     console.log(JSON.stringify(adContents));
-		}
+ 	        console.log(document.body.outerHTML);	
             });
 
             t = Date.now() - t;
-            console.log('Loading time ' + t + ' msec');
 	
 	    window.setTimeout(function () {
                 page.render(output);
